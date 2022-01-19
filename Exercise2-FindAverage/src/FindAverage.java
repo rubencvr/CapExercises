@@ -6,14 +6,23 @@ import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 public class FindAverage {
 	
-	public List<Integer> firstnumbers = new ArrayList<>();
+	private List<Integer> firstnumbers; 
 	
-	public int one;
-	public int two;
-	public int tre;; int average;
-	public Scanner scanner = new Scanner(System.in);
+	private int one;
+	private int two;
+	private int tre;
+	private int average;
+	private Scanner scanner = new Scanner(System.in);
 	
-	public void ScanfirtInts() {
+	public FindAverage() {
+		firstnumbers = new ArrayList<>();
+		ScanfirstInts();
+		PrintList();
+		PrintAverage();
+		
+	}
+	
+	private void ScanfirstInts() {
 		System.out.println("Enter the first number");
 		one = scanner.nextInt();
 		firstnumbers.add(one);
@@ -22,7 +31,7 @@ public class FindAverage {
 		two = scanner.nextInt();
 		firstnumbers.add(two);
 		
-		System.out.println("Enter the tird number");
+		System.out.println("Enter the third number");
 		tre = scanner.nextInt();
 		firstnumbers.add(tre);
 		
@@ -31,7 +40,7 @@ public class FindAverage {
 		
 	}
 	
-	public void PintAverage() {
+	private void PrintAverage() {
 		Integer sum = 0;
 		
 		for(Integer integer : firstnumbers) {
@@ -44,7 +53,7 @@ public class FindAverage {
 		System.out.println("This is the average of the chosen numbers: "+result);
 	}
 	
-	public void PrintList() {
+	private void PrintList() {
 		for(Integer integer : firstnumbers) {
 			System.out.println(integer);
 		}
