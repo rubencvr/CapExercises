@@ -37,8 +37,11 @@ public class FindAverage {
 		for(Integer integer : firstnumbers) {
 			sum = sum + integer;
 		}
-		
-		System.out.println("This is the average of the chosen numbers: "+sum/average);
+		average= sum/average;
+		System.out.println("average value :"+average);
+		System.out.println("sum value : "+sum);
+		double result = sum/average;
+		System.out.println("This is the average of the chosen numbers: "+result);
 	}
 	
 	public void PrintList() {
