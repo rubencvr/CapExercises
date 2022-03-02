@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,30 +10,38 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Entity(name="sessions_rcv")
+@Entity
+@Table(name="sessions_rcv")
 public class Session {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long session_id;
+	@Column(name = "NAME")
 	private String session_name;
+	@Column(name = "DESCRIPTION")
 	private String session_description;
+	@Column(name = "LENGTH")
 	private Integer session_length;
 	
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(
 			name = "session_speakers_rcv",
 			joinColumns = @JoinColumn(name = "session_id"),
 			inverseJoinColumns = @JoinColumn(name = "speaker_id"))
 	private List<Speaker> speakers;
 	
+	
 	List<Speaker> getSpeakers() {
 		return speakers;
 	}
 
-	void setSpeakers(List<Speaker> speakers) {
+	public void setSpeakers(List<Speaker> speakers) {
 		this.speakers = speakers;
 	}
+	*/
 
 	public Session() {
 		

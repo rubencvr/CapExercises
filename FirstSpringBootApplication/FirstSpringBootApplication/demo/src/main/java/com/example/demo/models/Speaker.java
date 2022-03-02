@@ -2,32 +2,35 @@ package com.example.demo.models;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
-@Entity(name="speakers_rcv")
+@Entity
+@Table(name="speakers_rcv")
 public class Speaker {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long speaker_id;
+	@Column(name = "FIRST_NAME")
 	private String first_name;
+	@Column(name = "LAST_NAME")
 	private String last_name;
+	@Column(name = "TITLE")
 	private String title;
+	@Column(name = "COMPANY")
 	private String company;
+	@Column(name = "SPEAKER_BIO")
 	private String speaker_bio;
 	
-	@Lob
-	@Type(type = "org.hibernate.type.BinaryType")
-	private byte[] speaker_photo;
 	
-	@ManyToMany(mappedBy = "speakers_rcv")
-	private List<Session> sessions;
+	//@ManyToMany(mappedBy = "Speaker")
+	//private List<Session> sessions;
 	
 	String getFirst_name() {
 		return first_name;
@@ -71,7 +74,7 @@ public class Speaker {
 
 	public Speaker() {}
 
-	public List<Session> getSessions() {
+	/*public List<Session> getSessions() {
 		return sessions;
 	}
 
@@ -79,12 +82,6 @@ public class Speaker {
 		this.sessions = sessions;
 	}
 
-	public byte[] getSpeaker_photo() {
-		return speaker_photo;
-	}
-
-	public void setSpeaker_photo(byte[] speaker_photo) {
-		this.speaker_photo = speaker_photo;
-	}
+*/
 
 }
