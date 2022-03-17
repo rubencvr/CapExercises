@@ -27,27 +27,28 @@ public class OrdersController {
 		return ordersRepository.findAll();
 	}
 	
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public Orders get(@PathVariable Long id) {
+	@PostMapping("/{id}")
+	public Orders get(@PathVariable Integer id) {
 		return ordersRepository.getOne(id);
 	}
 	
-	@PostMapping
+	@PostMapping("/createOrder")
 	public Orders create(@RequestBody final Orders orders){
 		return ordersRepository.saveAndFlush(orders);
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable Long id) {
+	@PostMapping("/deleteOrder/{id}")
+	public void delete(@PathVariable Integer id) {
 		ordersRepository.deleteById(id);
 	}
 	
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public Orders update(@PathVariable long id, @RequestBody Orders orders) {
+	@PostMapping("/updateOrder")
+	public Orders update(@PathVariable Integer id, @RequestBody Orders orders) {
 		Orders existingOrders = ordersRepository.getOne(id);
 		BeanUtils.copyProperties(orders, existingOrders, "orders_id");
 		return ordersRepository.saveAndFlush(existingOrders);
+
 	}
+
+
 }

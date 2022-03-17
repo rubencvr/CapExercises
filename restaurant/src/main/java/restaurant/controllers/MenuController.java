@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import restaurant.models.Menu;
 import restaurant.repositories.MenuRepository;
@@ -27,28 +23,35 @@ public class MenuController {
 		return menuRepository.findAll();
 	}
 	
-	@SuppressWarnings("deprecation")
-	@GetMapping
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public Menu get(@PathVariable Long id) {
+	@PostMapping("/{id}")
+	public Menu get(@PathVariable Integer id) {
 		return menuRepository.getOne(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/addMenu")
 	public Menu create(@RequestBody Menu menu){
-		return menuRepository.saveAndFlush(menu);
+		menuRepository.saveAndFlush(menu);
+		if(menu.equals(get(menu.getid()))){
+			return new ResponseEntity<>("OK", "2022-02 18:00:15", "200",
+					"00505682-6017-1eea-84d6-b19d557c24c1",
+					"Menu add Success",
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<>("NOK","2022-02 18:00:15", "500",
+				"00505682-6017-1eea-84d6-b19d557c24c1",
+				"Error: Fetch the error",
+				HttpStatus.BAD_REQUEST);
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable Long id) {
+	@DeleteMapping("/deleteMenu/{id}")
+	public void delete(@PathVariable Integer id) {
 		menuRepository.deleteById(id);
 	}
 	
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public Menu update(@PathVariable long id, @RequestBody Menu menu) {
+	@PostMapping("/updateMenu")
+	public Menu update(@PathVariable Integer id, @RequestBody Menu menu) {
 		Menu existingMenu = menuRepository.getOne(id);
-		BeanUtils.copyProperties(menu, existingMenu, "menu_id");
 		return menuRepository.saveAndFlush(existingMenu);
+
 	}
 }
